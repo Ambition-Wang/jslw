@@ -7,17 +7,21 @@
 
 <body>
 <center>
- 
+
 <h1><font size="+3" color="#CC0066">Ambition's </font> 
 <img src="b2.jpg"><font size="+3" color="black">Super Game</font>
                         </h1></center>
 <hr> <br>
-<p><center><font size="+1" color="#000000">’ ∫≈£∫</font><input type="text" name="userid" value=""></center></p>
+ <form action="" method="post" id="login">
+<p><center><font size="+1" color="#000000">’ ∫≈£∫</font><input type="text" name="userid" id="userid" value=""></center></p>
+<p><center><font size="+1" color="black">√‹¬Î£∫</font><input type="password" id="pwd" value=""></center></p>
+<p><center><input type="button" value="µ«¬º" onclick="open1()"> <input type="button" value="◊¢≤·" ></center></p>
+</form>
 
-<p><center><font size="+1" color="black">√‹¬Î£∫</font><input type="password" name="pwd" value=""></center></p>
-<p><center><input type="button" value="µ«¬º"> <input type="button" value="◊¢≤·"></center></p>
+
 
 <script>
+
   function runGame(plans, Display) {
     function startLevel(n, lives) {
       runLevel(new Level(plans[n]), Display, function(status) {
@@ -97,7 +101,21 @@
     return pressed;
   }
 
-  runGame(GAME_LEVELS, CanvasDisplay);
+  
+</script>
+<script language=javascript>
+function open1(){
+if(document.getElementById('userid').value==="") {
+alert("«Î ‰»Î”√ªß√˚£°");
+
+}else if(document.getElementById('pwd').value===""){
+alert("«Î ‰»Î√‹¬Î£°");
+}
+else {
+runGame(GAME_LEVELS, CanvasDisplay);
+document.getElementById('login').style.display = "none";
+}
+}
 </script>
 
 </body>
