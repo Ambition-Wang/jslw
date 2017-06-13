@@ -15,11 +15,10 @@
  <form action="" method="post" id="login">
 <p><center><font size="+1" color="#000000">帐号：</font><input type="text" name="userid" id="userid" value=""></center></p>
 <p><center><font size="+1" color="black">密码：</font><input type="password" id="pwd" value=""></center></p>
-<p><center><input type="button" value="登录" onclick="open1()"> <input type="button" value="注册" ></center></p>
+<p><center><input type="button" value="登录" onclick="login()"> <input type="button" value="注册" onclick="zhuce()"></center></p>
 </form>
-
-
-
+<center>
+<hl>
 <script>
 
   function runGame(plans, Display) {
@@ -29,13 +28,15 @@
           if (lives > 0) {
             startLevel(n, lives - 1);
           } else {
-            console.log("Game over");
+            console.log("Game Over");
+		alert("Game Over");
             startLevel(0, 3);
           }     
         } else if (n < plans.length - 1) {
           startLevel(n + 1, lives);
         } else {
           console.log("You win!");
+		alert("You Win!");
         }
       });
     }
@@ -104,7 +105,12 @@
   
 </script>
 <script language=javascript>
-function open1(){
+
+var listOfUser = [];
+
+function login(){
+var userid = document.getElementById('userid').value;
+var pwd = document.getElementById('pwd').value;
 if(document.getElementById('userid').value==="") {
 alert("请输入用户名！");
 
@@ -112,10 +118,53 @@ alert("请输入用户名！");
 alert("请输入密码！");
 }
 else {
-runGame(GAME_LEVELS, CanvasDisplay);
-document.getElementById('login').style.display = "none";
+	var i= 0;
+	for(i= 0;i<listOfUser.length;i++){
+	if(listOfUser[i].id===userid){
+		if(listOfUser[i].pw===pwd){
+			break;
+		}
+	}
+	}
+	if(i<listOfUser.length){
+		runGame(GAME_LEVELS, CanvasDisplay);
+		document.getElementById('login').style.display = "none";
+	}else{
+		alert("信息有误！");
+	}
 }
+
+
+
 }
+function zhuce() {
+	
+        var userid = prompt("请输入用户名", ""); //将输入的内容赋给变量 name ，  
+  	var pwd = prompt("请输入密码","");
+        //这里需要注意的是，prompt有两个参数，前面是提示的话，后面是当对话框出来后，在对话框里的默认值  
+        if (userid)//如果返回的有内容  
+        {  
+            if (pwd)//如果返回的有内容  
+        {  
+	    alert("欢迎您：" + userid);
+            alert("您的密码是：" + pwd);
+	    var user = {
+	       id:userid,
+	       pw:pwd,
+	       state:false
+	    };
+	    listOfUser[listOfUser.length] = user;
+        }else
+	    alert("请输入密码！");
+        }else
+	    alert("请输入用户名！");
+	localStorage.setItem("data",JSON.stringify(listOfUser));
+
+	
+}  
 </script>
+
+</hl>
+</center>
 
 </body>
